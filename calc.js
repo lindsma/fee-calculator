@@ -1,9 +1,39 @@
-
 // TODO: DEFINE ANY VARIABLES HERE
 
+// var current = display;
+var currentNumber = "";
+var number1;
+var number2;
+var operator;
+var newNumber = true;
+var newOperator = true;
 
 
 // TODO: DEFINE YOUR FUNCTIONS HERE
+
+function add(num1, num2) {
+  result = num1 + num2;
+  return result;
+}
+
+function subtract(num1, num2) {
+
+  result = num1 - num2;
+  return result;
+}
+
+function multiply(num1, num2) {
+
+  result = num1 * num2;
+  return result;
+
+}
+
+function divide(num1, num2) {
+
+  result = num1 / num2;
+  return result;
+}
 
 
 
@@ -15,10 +45,128 @@
  *
  * @param  {String} buttonValue   The value of the button that was clicked on, for example "6" or "+"
  */
+
 function handleButtonClick(buttonValue) {
+  switch (buttonValue) {
+    case "1":
+    case "2":
+    case "3":
+    case "4":
+    case "5":
+    case "6":
+    case "7":
+    case "8":
+    case "9":
+    case ".":
+    if (newNumber) {
+      currentNumber = "";
+      newNumber = false;
+    }
+    buffer = currentNumber + buttonValue;
+    break;
+    case "0":
+    if (buffer.length > 0) {
+      buffer = currentNumber + buttonValue;
+    }
+    break;
+    case "+":
+    case "-":
+    case "x":
+    case "/":
+    operator = buttonValue;
+    newNumber = true;
+    if (newOperator) {
+    number1 = Number(currentNumber);
+    buffer = number1;
+    newOperator = false;
+  } else {
+    number2 = Number(currentNumber);
+    switch (operator) {
+      case "+":
+      buffer = add(number1, number2);
+      number1 = Number(add(number1, number2));
+      number2 = "";
+      newNumber = true;
+      break;
+      case "-":
+      buffer = subtract(number1, number2);
+      number1 = Number(subtract(number1, number2));
+      number2 = "";
+      newNumber = true;
+      break;
+      case "x":
+      buffer = multiply(number1, number2);
+      number1 = Number(multiply(number1, number2));
+      number2 = "";
+      newNumber = true;
+      break;
+      case "/":
+      buffer = divide(number1, number2);
+      number1 = Number(divide(number1, number2));
+      number2 = "";
+      newNumber = true;
+      break;
+    }
+  }
+    break;
+    case "=":
+    if (number1 != undefined && operator != undefined) {
+      number2 = Number(currentNumber);
+      switch (operator) {
+        case "+":
+        buffer = add(number1, number2);
+        currentNumber = "";
+        number1 = "";
+        number2 = "";
+        newNumber = true;
+        newOperator = true;
+        break;
+        case "-":
+        buffer = subtract(number1, number2);
+        currentNumber = "";
+        number1 = "";
+        number2 = "";
+        newNumber = true;
+        newOperator = true;
+        break;
+        case "x":
+        buffer = multiply(number1, number2);
+        currentNumber = "";
+        number1 = "";
+        number2 = "";
+        newNumber = true;
+        newOperator = true;
+        break;
+        case "/":
+        buffer = divide(number1, number2);
+        currentNumber = "";
+        number1 = "";
+        number2 = "";
+        newNumber = true;
+        newOperator = true;
+        break;
+      }
+    }
+
+
+    console.log("the current contents are " + buffer);
+
+  }
+
+  console.log("the current contents are " + buffer);
+
+  if (buttonValue === "clear") {
+    currentNumber = "";
+    operator = "";
+    number1 = "";
+    number2 = "";
+    buffer="";
+
+  }
+currentNumber = buffer;
+  updateDisplay(buffer);
 
     // TODO: WRITE SOME OF YOUR CODE HERE
-
 }
 
 
